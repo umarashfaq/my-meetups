@@ -1,10 +1,20 @@
 // libs
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 
 // src
 import fire from './fire'
-import { Home, UsersList } from './routes'
+import {
+  Home,
+  UsersList,
+  UsersDetails,
+  UsersCreate,
+  UsersEdit,
+  GroupsList,
+  GroupsDetails,
+  GroupsCreate,
+  GroupsEdit
+} from './routes'
 import './App.css'
 
 class App extends Component {
@@ -50,8 +60,17 @@ class App extends Component {
           <Link to="/users">Users</Link>
         </header>
         <main>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/users" component={UsersList} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/users" component={UsersList} />
+            <Route exact path="/users/new" component={UsersCreate} />
+            <Route exact path="/users/:id" component={UsersDetails} />
+            <Route exact path="/users/:id/edit" component={UsersEdit} />
+            <Route exact path="/groups" component={GroupsList} />
+            <Route exact path="/groups/new" component={GroupsCreate} />
+            <Route exact path="/groups/:id" component={GroupsDetails} />
+            <Route exact path="/groups/:id/edit" component={GroupsEdit} />
+          </Switch>
         </main>
       </div>
     )

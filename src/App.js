@@ -1,5 +1,10 @@
-import React, { Component } from 'react';
-import fire from './fire';
+// libs
+import React, { Component } from 'react'
+import { Route, Link } from 'react-router-dom'
+
+// src
+import fire from './fire'
+import { Home, UsersList } from './routes'
 
 class App extends Component {
   constructor(props) {
@@ -21,18 +26,34 @@ class App extends Component {
     fire.database().ref('messages').push( this.inputEl.value );
     this.inputEl.value = ''; // <- clear the input
   }
+  /*
   render() {
     return (
       <form onSubmit={this.addMessage.bind(this)}>
         <input type="text" ref={ el => this.inputEl = el }/>
         <input type="submit"/>
         <ul>
-          { /* Render the list of messages */
             this.state.messages.map( message => <li key={message.id}>{message.text}</li> )
           }
         </ul>
       </form>
     );
+  }
+  */
+
+  render() {
+    return (
+      <div>
+        <header>
+          <Link to="/">Home</Link>
+          <Link to="/users">Users</Link>
+        </header>
+        <main>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/users" component={UsersList} />
+        </main>
+      </div>
+    )
   }
 }
 

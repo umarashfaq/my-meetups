@@ -5,6 +5,7 @@ import { Route, Link } from 'react-router-dom'
 // src
 import fire from './fire'
 import { Home, UsersList } from './routes'
+import './App.css'
 
 class App extends Component {
   constructor(props) {

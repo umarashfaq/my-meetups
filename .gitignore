@@ -10,7 +10,9 @@
 /build
 
 # misc
-/src/fire.js
+src/fire.js
+src/**/*.css
+
 .DS_Store
 .env.local
 .env.development.local

@@ -5,7 +5,8 @@ import R from 'ramda'
 // src
 import {
     receiveUser,
-    receiveGroup,
+    handleGroupCreate,
+    handleGroupDelete,
     setLoadingStateForInitialUsers,
     setLoadingStateForInitialGroups
 } from '../../actions'
@@ -13,7 +14,7 @@ import fire from '../../fire'
 
 const entitySessions = {}
 
-const startListening = (entityKey, { dispatch, onInitialLoadingComplete, onReceiveEntity }) => {
+const startListening = (entityKey, { dispatch, onInitialLoadingComplete, onReceiveEntity, onRemoveEntity }) => {
     if ( entitySessions[entityKey] ) {
         // don't listen twice
         return
@@ -29,10 +30,13 @@ const startListening = (entityKey, { dispatch, onInitialLoadingComplete, onRecei
             return
         }
 
-        // console.log(`child_added callback triggered: `, snapshot.val())
-        
         const entity = { id: snapshot.key, ...snapshot.val() }
         onReceiveEntity && onReceiveEntity(entity)
+    })
+
+    session.ref.on('child_removed', snapshot => {
+        const entity = { id: snapshot.key, ...snapshot.val() }
+        onRemoveEntity && onRemoveEntity(entity)
     })
 
     session.ref.once('value', snapshot => {
@@ -51,22 +55,15 @@ export default connect()(class Firebase extends React.Component {
 
         dispatch(setLoadingStateForInitialUsers(true))
         startListening('users', {
-            onReceiveEntity: entity => {
-                dispatch(receiveUser(entity))
-            },
-            onInitialLoadingComplete: () => {
-                dispatch(setLoadingStateForInitialUsers(false))
-            }
+            onReceiveEntity: entity => dispatch(receiveUser(entity)),
+            onInitialLoadingComplete: () => dispatch(setLoadingStateForInitialUsers(false))
         })
 
         dispatch(setLoadingStateForInitialGroups(true))
         startListening('groups', {
-            onReceiveEntity: entity => {
-                dispatch(receiveGroup(entity))
-            },
-            onInitialLoadingComplete: () => {
-                dispatch(setLoadingStateForInitialGroups(false))
-            }
+            onReceiveEntity: entity => dispatch(handleGroupCreate(entity)),
+            onRemoveEntity: entity => dispatch(handleGroupDelete(entity)),
+            onInitialLoadingComplete: () => dispatch(setLoadingStateForInitialGroups(false))
         })
     }
     componentWillUnmount() {

@@ -9,6 +9,7 @@ import './GroupsList.css'
 import Loading from './Loading'
 import BlankSlate from './BlankSlate'
 import Content from './Content'
+import { deleteGroup } from '../../actions'
 
 export default connect(state => {
     const groups = R.pipe(R.path(['entities', 'groups']), R.values)(state)
@@ -21,6 +22,14 @@ export default connect(state => {
         isAvailable
     }
 })(class GroupsList extends React.Component {
+    handleClickDelete = groupID => {
+        if ( !window.confirm(`Sure to delete?`) ) {
+            return
+        }
+
+        const { dispatch } = this.props
+        dispatch(deleteGroup(groupID))
+    }
     render() {
         const { isLoading, isAvailable } = this.props
 
@@ -31,7 +40,7 @@ export default connect(state => {
                 {
                     isLoading    ? <Loading {...this.props}/>    :
                     !isAvailable ? <BlankSlate {...this.props}/> :
-                                   <Content  {...this.props}/>
+                                   <Content  {...this.props} onClickDelete={this.handleClickDelete}/>
                 }
             </article>
         )

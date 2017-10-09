@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
+import { createLogger } from 'redux-logger'
 
 // src
 import rootReducer from '../reducers'
@@ -22,6 +23,11 @@ if (process.env.NODE_ENV === 'development') {
   if (typeof devToolsExtension === 'function') {
     enhancers.push(devToolsExtension())
   }
+
+  middleware.push(createLogger({
+    collapsed: true,
+    diff: true
+  }))
 }
 
 const composedEnhancers = compose(

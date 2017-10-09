@@ -3,53 +3,75 @@ import { connect } from 'react-redux'
 import R from 'ramda'
 
 // src
-import { receiveUser, setLoadingStateForInitialUsers } from '../../actions'
+import {
+    receiveUser,
+    receiveGroup,
+    setLoadingStateForInitialUsers,
+    setLoadingStateForInitialGroups
+} from '../../actions'
 import fire from '../../fire'
 
-let usersRef
-let initialUsersLoaded = false
+const entitySessions = {}
 
-const startListening = ({ dispatch }) => {
-    if ( usersRef ) {
+const startListening = (entityKey, { dispatch, onInitialLoadingComplete, onReceiveEntity }) => {
+    if ( entitySessions[entityKey] ) {
         // don't listen twice
         return
     }
 
-    dispatch(setLoadingStateForInitialUsers(true))
+    const session = entitySessions[entityKey] = {
+        ref: fire.database().ref(entityKey).orderByKey().limitToLast(100),
+        isInitialLoadingComplete: false
+    }
 
-    /* Create reference to messages in Firebase Database */
-    usersRef = fire.database().ref('users').orderByKey().limitToLast(100);
-
-    usersRef.on('child_added', snapshot => {
-        if ( !initialUsersLoaded ) {
+    session.ref.on('child_added', snapshot => {
+        if ( !session.isInitialLoadingComplete ) {
             return
         }
 
-        console.log(`child_added callback triggered: `, snapshot.val())
+        // console.log(`child_added callback triggered: `, snapshot.val())
         
-        const user = { id: snapshot.key, ...snapshot.val() }
-        dispatch(receiveUser(user))
+        const entity = { id: snapshot.key, ...snapshot.val() }
+        onReceiveEntity && onReceiveEntity(entity)
     })
 
-    usersRef.once('value', snapshot => {
-        console.log(`value callback triggered: `, snapshot.val())
-        R.forEachObjIndexed((v, k) => dispatch(receiveUser({...v, id: k})), snapshot.val()) // snapshot.val()
-        initialUsersLoaded = true
-        dispatch(setLoadingStateForInitialUsers(false))
+    session.ref.once('value', snapshot => {
+        // console.log(`value callback triggered: `, snapshot.val())
+        R.forEachObjIndexed((v, k) => onReceiveEntity && onReceiveEntity({...v, id: k}), snapshot.val()) // snapshot.val()
+        session.isInitialLoadingComplete = true
+        onInitialLoadingComplete && onInitialLoadingComplete()
     })
 }
 
-const stopListening = () => {
-    usersRef && usersRef.off()
-}
+const stopListening = entityKey => entitySessions[entityKey] && entitySessions[entityKey].ref.off()
 
 export default connect()(class Firebase extends React.Component {
     componentDidMount() {
         const { dispatch } = this.props
-        startListening({ dispatch })
+
+        dispatch(setLoadingStateForInitialUsers(true))
+        startListening('users', {
+            onReceiveEntity: entity => {
+                dispatch(receiveUser(entity))
+            },
+            onInitialLoadingComplete: () => {
+                dispatch(setLoadingStateForInitialUsers(false))
+            }
+        })
+
+        dispatch(setLoadingStateForInitialGroups(true))
+        startListening('groups', {
+            onReceiveEntity: entity => {
+                dispatch(receiveGroup(entity))
+            },
+            onInitialLoadingComplete: () => {
+                dispatch(setLoadingStateForInitialGroups(false))
+            }
+        })
     }
     componentWillUnmount() {
-        stopListening()
+        stopListening('users')
+        stopListening('groups')
     }
     render() {
         return null

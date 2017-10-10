@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { push } from 'react-router-redux'
 import R from 'ramda'
 
 // src
@@ -30,6 +31,10 @@ export default connect(state => {
         const { dispatch } = this.props
         dispatch(deleteGroup(groupID))
     }
+    handleClickDetails = groupID => {
+        const { dispatch } = this.props
+        dispatch(push(`/groups/${groupID}`))
+    }
     render() {
         const { isLoading, isAvailable } = this.props
 
@@ -40,7 +45,9 @@ export default connect(state => {
                 {
                     isLoading    ? <Loading {...this.props}/>    :
                     !isAvailable ? <BlankSlate {...this.props}/> :
-                                   <Content  {...this.props} onClickDelete={this.handleClickDelete}/>
+                                   <Content  {...this.props}
+                                    onClickDelete={this.handleClickDelete}
+                                    onClickDetails={this.handleClickDetails}/>
                 }
             </article>
         )

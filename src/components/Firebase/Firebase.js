@@ -4,7 +4,9 @@ import R from 'ramda'
 
 // src
 import {
-    receiveUser,
+    handleUserCreate,
+    handleUserDelete,
+    handleUserUpdate,
     handleGroupCreate,
     handleGroupDelete,
     setLoadingStateForInitialUsers,
@@ -14,7 +16,7 @@ import fire from '../../fire'
 
 const entitySessions = {}
 
-const startListening = (entityKey, { dispatch, onInitialLoadingComplete, onReceiveEntity, onRemoveEntity }) => {
+const startListening = (entityKey, { onInitialLoadingComplete, onReceiveEntity, onRemoveEntity, onUpdateEntity }) => {
     if ( entitySessions[entityKey] ) {
         // don't listen twice
         return
@@ -39,6 +41,11 @@ const startListening = (entityKey, { dispatch, onInitialLoadingComplete, onRecei
         onRemoveEntity && onRemoveEntity(entity)
     })
 
+    session.ref.on('child_changed', snapshot => {
+        const entity = { id: snapshot.key, ...snapshot.val() }
+        onUpdateEntity && onUpdateEntity(entity)
+    })
+
     session.ref.once('value', snapshot => {
         // console.log(`value callback triggered: `, snapshot.val())
         R.forEachObjIndexed((v, k) => onReceiveEntity && onReceiveEntity({...v, id: k}), snapshot.val()) // snapshot.val()
@@ -55,7 +62,9 @@ export default connect()(class Firebase extends React.Component {
 
         dispatch(setLoadingStateForInitialUsers(true))
         startListening('users', {
-            onReceiveEntity: entity => dispatch(receiveUser(entity)),
+            onReceiveEntity: entity => dispatch(handleUserCreate(entity)),
+            onRemoveEntity: entity => dispatch(handleUserDelete(entity)),
+            onUpdateEntity: entity => dispatch(handleUserUpdate(entity)),
             onInitialLoadingComplete: () => dispatch(setLoadingStateForInitialUsers(false))
         })
 

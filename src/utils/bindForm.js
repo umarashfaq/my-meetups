@@ -1,13 +1,12 @@
-/* @flow */
-
 // libs
 import React from 'react'
 import Button from 'react-toolbox/lib/button/Button'
-import get from 'lodash/get'
-import has from 'lodash/has'
+import R from 'ramda'
+// import get from 'lodash/get'
+// import has from 'lodash/has'
 
 // src
-import { ENTITY_STATUS_DATA_AVAILABLE } from './utils'
+import { hasPropChanged } from './utils'
 
 /**
  * A higher order function that injects some additional params to a form component
@@ -30,24 +29,16 @@ export default (options) => (WrappedComponent) => {
         this.handleSubmit = handleSubmit(this.wrapSubmit( onSubmit ))
     }
     componentDidMount() {
-        const hasEntity = has(this.props, 'entity')
+        const entity = R.path(['entity'], this.props)
         
-        if ( hasEntity ) {
-            const entity = get(this.props, 'entity')
-            const status = get(this.props, 'entity.__status__')
-
-            this.handleChangeEntityStatus(entity, status)
+        if ( entity ) {
+            this.handleChangeEntity(entity)
         }
     }
     componentWillReceiveProps(nextProps) {
-        const hasEntity = has(this.props, 'entity')
-        const status = get(this.props, 'entity.__status__')
-        const nextStatus = get(nextProps, 'entity.__status__')
-
-        // debugger;
-
-        if ( hasEntity && status !== nextStatus ) {
-            this.handleChangeEntityStatus(nextProps.entity, nextStatus)
+        if ( hasPropChanged('entity', this.props, nextProps) ) {
+          const entity = R.path(['entity'], nextProps)
+          this.handleChangeEntity(entity)
         }
     }
     /**
@@ -56,8 +47,9 @@ export default (options) => (WrappedComponent) => {
      * 2. __status__ of that entity has changed
      * 
      */
-    handleChangeEntityStatus = (entity, status) => {    
-        if ( status === ENTITY_STATUS_DATA_AVAILABLE ) {
+    handleChangeEntity = entity => {
+      console.log(`[bindForm/handleChangeEntity] Invoking with entity: `, entity)
+        if ( entity ) {
             const { initialize } = this.props
             initialize(entity)
         }

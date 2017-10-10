@@ -35,7 +35,9 @@
   },
   "reactToolbox": {
     "include": [
+      "AUTOCOMPLETE",
       "BUTTON",
+      "CHIP",
       "INPUT",
       "TABS"
     ],

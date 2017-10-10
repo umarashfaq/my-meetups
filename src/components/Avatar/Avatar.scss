@@ -1,0 +1,13 @@
+$size: 3rem;
+
+.Avatar {
+    width: $size;
+    height: $size;
+    line-height: $size;
+    border-radius: $size / 2;
+    background: linear-gradient(#AAA, #999);
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+}

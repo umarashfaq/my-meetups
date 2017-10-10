@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import R from 'ramda'
+import Button from 'react-toolbox/lib/button/Button'
 
 // src
 import './UsersList.css'
@@ -31,13 +32,19 @@ export default connect(state => {
         const { dispatch } = this.props
         dispatch(push(`/users/${id}/edit`))
     }
+    handleClickNew = () => {
+        const { dispatch } = this.props
+        dispatch(push(`/users/new`))
+    }
     render() {
         const { isLoading, isAvailable } = this.props
 
         return (
             <article>
-                <h1>Users</h1>
-                <Link to="/users/new">New</Link>
+                <div className="UserList-Header">
+                    <h1>Users</h1>
+                    <Button label="New" accent raised className="UserList-Button" onClick={this.handleClickNew}/>
+                </div>
                 {
                     isLoading    ? <Loading {...this.props}/>    :
                     !isAvailable ? <BlankSlate {...this.props}/> :

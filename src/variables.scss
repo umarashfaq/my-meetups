@@ -1,0 +1,25 @@
+$width: 1000px;
+
+$breakpoints: (
+    sm: 48rem,
+    md: 72rem,
+    lg: 96rem,
+);
+
+@mixin when-bigger-than($size) {  
+    @media (min-width: map-get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+@mixin when-smaller-than($size) {  
+    @media (max-width: map-get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+@mixin apply-grid() {
+    display: grid;
+    grid-template-columns: 1fr repeat(6, minmax(auto, 10rem)) 1fr;
+    // grid-template-rows: minmax(1rem, auto) 1fr auto minmax(1rem, auto);
+}

@@ -1,0 +1,42 @@
+@import '../../variables.scss';
+
+.UserItem {
+    cursor: pointer;
+}
+
+.UserItem-Card {
+    @include when-smaller-than(sm) {
+        box-shadow: none !important;
+        border-radius: 0;
+        border-bottom: 1px solid #efefef;
+    }
+}
+
+.UserItem-Content {
+    display: flex;
+    padding: 1rem;
+
+    &:hover {
+        background: #FFF9A8;
+    }
+}
+
+.UserItem-Avatar {
+    margin-right: 1rem;
+}
+
+.UserItem-Info {
+    flex-grow: 1;
+    margin-top: 0.5rem;
+}
+
+.UserItem-Info-Primary {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.UserItem-Info-Secondary {
+    margin: 0;
+    color: #999;
+}

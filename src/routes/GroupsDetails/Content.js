@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'react-toolbox/lib/button/Button'
 
 const Content = ({ entity, members }) => (
     <section>

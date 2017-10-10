@@ -22,9 +22,9 @@ import './App.css'
 export default class App extends React.Component {
   render() {
     return (
-      <div>
-        <main>
-          <Route component={Header}/>
+      <main className="App">
+        <Route component={Header}/>
+        <div className="App-Content">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/users" component={UsersList} />
@@ -36,9 +36,9 @@ export default class App extends React.Component {
             <Route exact path="/groups/:id" component={GroupsDetails} />
             <Route exact path="/groups/:id/edit" component={GroupsEdit} />
           </Switch>
-          <Firebase/>
-        </main>
-      </div>
+        </div>
+        <Firebase/>
+      </main>
     )
   }
 }

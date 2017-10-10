@@ -3,9 +3,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Link } from 'react-router-dom'
+import R from 'ramda'
+
+import AppBar from 'react-toolbox/lib/app_bar/AppBar'
 import Tabs from 'react-toolbox/lib/tabs/Tabs'
 import Tab from 'react-toolbox/lib/tabs/Tab'
-import R from 'ramda'
+
+// src
+import './Header.css'
 
 const tabs = ['/users', '/groups']
 
@@ -30,17 +35,19 @@ export default connect((state, ownProps) => {
         const { tabIndex } = this.props
 
         return (
-            <header>
-                <div className="logo">
-                    <Link to="/">MyMeetups</Link>
-                </div>
-                <div>
-                    <Tabs index={tabIndex} onChange={this.handleTabChange}>
-                        <Tab label="Users"><small>Users</small></Tab>
-                        <Tab label="Groups"><small>Groups</small></Tab>
-                    </Tabs>
-                </div>
-            </header>
+            <div className="Header">
+                <AppBar fixed>
+                    <div className="Header-AppBar-Grid">
+                        <div className="Header-AppBar-InnerWrapper">
+                            <Link to="/" className="Header-AppBar-Logo">MyMeetups</Link>
+                            <Tabs index={tabIndex} onChange={this.handleTabChange} inverse theme={{navigation: 'Header-AppBar-Tabs-Nav', tab: 'Header-AppBar-Tabs-Tab'}}>
+                                <Tab label="Users"/>
+                                <Tab label="Groups"/>
+                            </Tabs>
+                        </div>
+                    </div>
+                </AppBar>
+            </div>
         )
     }
 })

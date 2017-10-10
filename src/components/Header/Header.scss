@@ -1,0 +1,53 @@
+@import '../../variables.scss';
+
+$bar-height-sm: calc(4rem - 8px);
+$bar-height-lg: 4rem;
+
+.Header {
+    grid-column: span 8;
+}
+
+.Header-AppBar-Grid {
+    width: 100%;
+    @include apply-grid();
+}
+
+.Header-AppBar-InnerWrapper {
+    display: flex;
+    grid-column: 2/8;
+}
+
+.Header-AppBar-Logo {
+    flex-grow: 1;
+    font-size: 1.2rem;
+    text-decoration: none;
+    line-height: $bar-height-sm;
+
+    @include when-bigger-than(sm) {
+        line-height: $bar-height-lg;
+    }
+}
+
+.Header-AppBar-Tabs-Nav {
+    background-color: transparent !important;
+    box-shadow: none !important;
+
+    & > div {
+        padding-bottom: 0;
+        /* margin: 0; */
+        line-height: $bar-height-sm;
+        padding-top: 0;
+        
+        @include when-bigger-than(sm) {
+            line-height: $bar-height-lg;
+        }
+    }
+}
+
+.Header-AppBar-Tabs-Tab {
+    line-height: $bar-height-sm;
+
+    @include when-bigger-than(sm) {
+        line-height: $bar-height-lg;
+    }
+}

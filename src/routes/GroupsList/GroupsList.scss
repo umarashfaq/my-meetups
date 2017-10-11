@@ -13,3 +13,16 @@
     width: 100%;
     display: inline-block;
 }
+
+.GroupsList-Actions {
+    display: flex;
+}
+
+.GroupsList-Actions-Search {
+    margin: -1rem 2rem 0 0 !important;
+}
+
+.GroupsList-Status {
+    font-size: 0.8rem;
+    color: #999;
+}

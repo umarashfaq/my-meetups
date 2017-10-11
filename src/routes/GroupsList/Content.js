@@ -3,11 +3,11 @@ import Button from 'react-toolbox/lib/button/Button'
 
 import { InfoChip } from '../../components'
 
-const Content = ({ groups, onClickItem, counts }) => (
+const Content = ({ filteredGroups, onClickItem, counts }) => (
     <section>
         <ul className="GroupList-List">
             {
-                groups.map(g =>
+                filteredGroups.map(g =>
                     <li key={g.id}  className="GroupList-Item">
                         <InfoChip
                             entity={g}
@@ -18,6 +18,7 @@ const Content = ({ groups, onClickItem, counts }) => (
                 )
             }
         </ul>
+        <p className="GroupsList-Status">{filteredGroups.length} record(s) found</p>
     </section>
 )
 

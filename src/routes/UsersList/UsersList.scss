@@ -10,12 +10,25 @@
     list-style: none;
 }
 
-.UserList-Button {
-    margin: 0;
-}
-
 .UserList-Item {
     margin-bottom: 1rem;
     width: 100%;
     display: inline-block;
+}
+
+.UsersList-Actions {
+    display: flex;
+}
+
+.UsersList-Actions-Search {
+    margin: -1rem 2rem 0 0 !important;
+}
+
+.UserList-Button {
+    margin: 0;
+}
+
+.UsersList-Status {
+    font-size: 0.8rem;
+    color: #999;
 }

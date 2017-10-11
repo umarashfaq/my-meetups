@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import R from 'ramda'
 import Button from 'react-toolbox/lib/button/Button'
+import Input from 'react-toolbox/lib/input/Input'
 
 // src
 import './GroupsList.css'
 import Content from './Content'
-import { deleteGroup } from '../../actions'
+import { deleteGroup, updateGroupSearchQuery } from '../../actions'
 import { Breadcrumbs, Article } from '../../components'
 import { getGroupMemberCount } from '../../utils'
 
@@ -17,6 +18,8 @@ export default connect(state => {
     const groups = R.pipe(R.path(['entities', 'groups']), R.values)(state)
     const isLoading = R.path(['meta', 'isLoadingGroups'], state)
     const isAvailable = groups && groups.length > 0
+    const query = R.path(['meta', 'groupSearchQuery'], state) || ''
+    const filteredGroups = R.filter(R.pipe(R.values, R.any(v => v.indexOf(query) > -1)), groups)
 
     const counts = isAvailable ? getGroupMemberCount(state) : {}
     // console.log('counts: ', counts)
@@ -25,7 +28,9 @@ export default connect(state => {
         groups,
         isLoading,
         isAvailable,
-        counts
+        counts,
+        query,
+        filteredGroups
     }
 })(class GroupsList extends React.Component {
     handleClickDelete = groupID => {
@@ -48,11 +53,24 @@ export default connect(state => {
         const { dispatch } = this.props
         dispatch(push(`/groups/${groupID}`))
     }
+    handleChangeQuery = query => {
+        // this.setState({ query })
+        const { dispatch } = this.props
+        dispatch(updateGroupSearchQuery(query))
+    }
     render() {
-        const { isLoading, isAvailable, location } = this.props
+        const { isLoading, isAvailable, location, query } = this.props
 
         return (
-            <Article title="Groups" actions={<Button label="New" accent raised className="GroupList-Button" onClick={this.handleClickNew}/>} {...this.props}>
+            <Article
+                title="Groups"
+                actions={
+                    <div className="GroupsList-Actions">
+                        <Input type="text" label="Search" name="search" className="GroupsList-Actions-Search" value={ query } onChange={this.handleChangeQuery} />
+                        <Button label="New" accent raised className="GroupList-Button" onClick={this.handleClickNew}/>
+                    </div>
+                }
+                {...this.props}>
                 <Content
                     {...this.props}
                     onClickItem={this.handleClickItem}/>

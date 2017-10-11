@@ -17,6 +17,12 @@ function meta(state = {}, action) {
     case ActionTypes.META_GROUPS_SET_LOADING_STATE: {
       return {...state, isLoadingGroups: payload}
     }
+    case ActionTypes.META_USERS_SEARCH_QUERY: {
+      return {...state, userSearchQuery: payload}
+    }
+    case ActionTypes.META_GROUPS_SEARCH_QUERY: {
+      return {...state, groupSearchQuery: payload}
+    }
     default: {
       return state
     }

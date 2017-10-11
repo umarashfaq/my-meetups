@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Button from 'react-toolbox/lib/button/Button'
 
+import './Home.css'
+
 export default connect()(class Home extends React.Component {
     handleClickGroups = () => {
         const { dispatch } = this.props

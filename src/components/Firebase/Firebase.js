@@ -9,6 +9,7 @@ import {
     handleUserUpdate,
     handleGroupCreate,
     handleGroupDelete,
+    handleGroupUpdate,
     setLoadingStateForInitialUsers,
     setLoadingStateForInitialGroups
 } from '../../actions'
@@ -72,6 +73,7 @@ export default connect()(class Firebase extends React.Component {
         startListening('groups', {
             onReceiveEntity: entity => dispatch(handleGroupCreate(entity)),
             onRemoveEntity: entity => dispatch(handleGroupDelete(entity)),
+            onUpdateEntity: entity => dispatch(handleGroupUpdate(entity)),
             onInitialLoadingComplete: () => dispatch(setLoadingStateForInitialGroups(false))
         })
     }

@@ -1,0 +1,16 @@
+.Breadcrumbs {
+    // display: inline-block;
+    margin: 6rem 0 0.5rem 0;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    color: #999;
+  
+    a {
+      text-decoration: none;
+      color: #666;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }

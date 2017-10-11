@@ -1,0 +1,11 @@
+.Page {
+
+}
+
+.Page-Header {
+    display: flex;
+
+    & > h1 {
+        flex-grow: 1;
+    }
+}

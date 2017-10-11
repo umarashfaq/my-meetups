@@ -7,13 +7,13 @@ $breakpoints: (
 );
 
 @mixin when-bigger-than($size) {  
-    @media (min-width: map-get($breakpoints, $size)) {
+    @media all and (min-width: map-get($breakpoints, $size)) {
         @content;
     }
 }
 
 @mixin when-smaller-than($size) {  
-    @media (max-width: map-get($breakpoints, $size)) {
+    @media all and (max-width: map-get($breakpoints, $size)) {
         @content;
     }
 }

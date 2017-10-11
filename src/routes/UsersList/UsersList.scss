@@ -3,41 +3,19 @@
 .UsersList {
 }
 
-.UserList-Header {
-    display: flex;
-    padding: 0 1.5rem;
-
-    & > h1 {
-        flex-grow: 1;
-        margin: 2rem 0;
-        font-size: 2rem;
-        color: #333;
-    }
-
-    @include when-bigger-than(sm) {
-        padding: 0;
-    }
-}
-
 .UserList-List {
     padding: 0;
     margin: 0;
-    column-count: 1;
+    column-count: 3;
     list-style: none;
-
-    @include when-bigger-than(sm) {
-        column-count: 3;
-    }
 }
 
 .UserList-Button {
-    margin: 2rem 0;
+    margin: 0;
 }
 
 .UserList-Item {
-    margin-bottom: 0;
-
-    @include when-bigger-than(sm) {
-        margin-bottom: 1rem;
-    }
+    margin-bottom: 1rem;
+    width: 100%;
+    display: inline-block;
 }

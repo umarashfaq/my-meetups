@@ -3,6 +3,7 @@ import React from 'react'
 import R from 'ramda'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+import { push } from 'react-router-redux'
 import Button from 'react-toolbox/lib/button/Button'
 
 // src
@@ -11,6 +12,7 @@ import { isLoadingUsers, bindForm, getParamValue, getEntityByID } from '../../ut
 import Loading from './Loading'
 import BlankSlate from './BlankSlate'
 import Content from './Content'
+import { Breadcrumbs } from '../../components'
 
 export default 
     connect((state, ownProps) => {
@@ -27,17 +29,17 @@ export default
         form: 'usersUpdate'
     })(
     bindForm({
-        onSubmit: (values, dispatch) => {
-            console.log('Submitting .... ', values)
-            return dispatch(updateUser(values))
-        }
+        onSubmit: (values, dispatch) =>
+            dispatch(updateUser(values))
+                .then(() => dispatch(push(`/users/${values.id}`)))
     })(
         class UsersEdit extends React.Component {
             render() {
-                const { isLoading, isAvailable } = this.props
+                const { isLoading, isAvailable, location } = this.props
                 return (
                     <article>
-                        <h1>Update User</h1>
+                        <Breadcrumbs pathname={location.pathname}/>
+                        <h1>Edit</h1>
                         {
                             isLoading    ? <Loading    {...this.props}/> :
                             !isAvailable ? <BlankSlate {...this.props}/> :

@@ -5,13 +5,15 @@ import './Avatar.css'
 
 const getInitial = s => s ? s.charAt(0).toUpperCase() : ''
 const getUserInitials = ({ firstName, lastName }) => getInitial(firstName) + getInitial(lastName)
+const getGroupInitials = ({ name }) => getInitial(name)
+const getEntityInitials = entity => (entity.firstName ? getUserInitials : getGroupInitials)(entity)
 
-const Avatar = ({ user, className = '' }) => (
-    <div className={['Avatar', className].join(' ')}>{getUserInitials(user)}</div>
+const Avatar = ({ entity, className = '' }) => (
+    <div className={['Avatar', className].join(' ')}>{getEntityInitials(entity)}</div>
 )
 
 Avatar.propTypes = {
-    user: PropTypes.object.isRequired,
+    entity: PropTypes.object.isRequired,
     className: PropTypes.string
 }
 

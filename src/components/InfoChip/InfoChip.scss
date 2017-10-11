@@ -1,13 +1,13 @@
 @import '../../variables.scss';
 
-.UserItem {
+.InfoChip {
     cursor: pointer;
 }
 
-.UserItem-Card {
+.InfoChip-Card {
 }
 
-.UserItem-Content {
+.InfoChip-Content {
     display: flex;
     padding: 1rem;
 
@@ -16,22 +16,22 @@
     }
 }
 
-.UserItem-Avatar {
+.InfoChip-Avatar {
     margin-right: 1rem;
 }
 
-.UserItem-Info {
+.InfoChip-Info {
     flex-grow: 1;
     margin-top: 0.5rem;
 }
 
-.UserItem-Info-Primary {
+.InfoChip-Info-Primary {
     margin: 0;
     color: #333;
     font-weight: 600;
 }
 
-.UserItem-Info-Secondary {
+.InfoChip-Info-Secondary {
     margin: 0;
     color: #999;
 }

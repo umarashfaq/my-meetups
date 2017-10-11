@@ -1,11 +1,21 @@
 import React from 'react'
 import Button from 'react-toolbox/lib/button/Button'
 
-const Content = ({ groups, onClickDelete, onClickDetails }) => (
+import { InfoChip } from '../../components'
+
+const Content = ({ groups, onClickItem, counts }) => (
     <section>
-        <ul>
+        <ul className="GroupList-List">
             {
-                groups.map(({id, name}) => <li key={id}>{name} <Button label="Details" onClick={ onClickDetails.bind(null, id) }/> <Button label="DELETE" onClick={ onClickDelete.bind(null, id) }/></li>)
+                groups.map(g =>
+                    <li key={g.id}  className="GroupList-Item">
+                        <InfoChip
+                            entity={g}
+                            primaryText={g.name}
+                            secondaryText={`${counts[g.id] || 0} member(s)`}
+                            onClick={onClickItem.bind(null, g.id)}/>
+                    </li>
+                )
             }
         </ul>
     </section>

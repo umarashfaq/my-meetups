@@ -1,2 +1,15 @@
 .GroupsList {
 }
+
+.GroupList-List {
+    padding: 0;
+    margin: 0;
+    column-count: 3;
+    list-style: none;
+}
+
+.GroupList-Item {
+    margin-bottom: 1rem;
+    width: 100%;
+    display: inline-block;
+}

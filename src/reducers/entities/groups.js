@@ -4,7 +4,8 @@ export default function(state = {}, action) {
     const { type, payload } = action
 
     switch( type ) {
-        case ActionTypes.GROUPS_HANDLE_CREATE: {
+        case ActionTypes.GROUPS_HANDLE_CREATE: 
+        case ActionTypes.GROUPS_HANDLE_UPDATE: {
             const { id } = payload
             return {
                 ...state,

@@ -8,10 +8,9 @@ import Button from 'react-toolbox/lib/button/Button'
 
 // src
 import './UsersList.css'
-import Loading from './Loading'
-import BlankSlate from './BlankSlate'
 import Content from './Content'
 import { isLoadingUsers } from '../../utils'
+import { Breadcrumbs, Page } from '../../components'
 
 export default connect(state => {
     const users = R.pipe(R.path(['entities', 'users']), R.values)(state)
@@ -37,22 +36,14 @@ export default connect(state => {
         dispatch(push(`/users/new`))
     }
     render() {
-        const { isLoading, isAvailable } = this.props
+        const { isLoading, isAvailable, location } = this.props
 
         return (
-            <article>
-                <div className="UserList-Header">
-                    <h1>Users</h1>
-                    <Button label="New" accent raised className="UserList-Button" onClick={this.handleClickNew}/>
-                </div>
-                {
-                    isLoading    ? <Loading {...this.props}/>    :
-                    !isAvailable ? <BlankSlate {...this.props}/> :
-                                   <Content  {...this.props}
-                                        onClickEdit={this.handleClickEdit}
-                                        onClickDetails={this.handleClickDetails}/>
-                }
-            </article>
+            <Page title="Users" actions={<Button label="New" accent raised className="UserList-Button" onClick={this.handleClickNew}/>} {...this.props}>
+                <Content  {...this.props}
+                    onClickEdit={this.handleClickEdit}
+                    onClickDetails={this.handleClickDetails}/>
+            </Page>
         )
     }
 })

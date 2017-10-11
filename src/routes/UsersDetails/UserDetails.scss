@@ -1,0 +1,27 @@
+.UserDetails-Wrapper {
+    display: flex;
+}
+
+.UserDetails-Wrapper-Avatar {
+    margin-right: 1rem;
+}
+
+.UserDetails-Wrapper-Info {
+    flex-grow: 1;
+    margin-top: 0.5rem;
+}
+
+.UserDetails-Wrapper-Info-Primary {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.UserDetails-Wrapper-Info-Secondary {
+    margin: 0;
+    color: #999;
+}
+
+.UserDetails-Wrapper-Info-Groups {
+    padding: 0 1rem;
+}

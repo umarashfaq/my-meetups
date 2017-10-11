@@ -1,15 +1,28 @@
 import React from 'react'
 import Button from 'react-toolbox/lib/button/Button'
+import { Link } from 'react-router-dom'
 
-const Content = ({ entity, groups }) => (
+import { Avatar, Paper } from '../../components'
+
+const Content = ({ entity, groups, onClickDelete }) => (
     <section>
-        <p>{entity.lastName}, {entity.firstName}</p>
-        <p>{entity.email}</p>
-        <ul>
-            {
-                groups.map(g => <li>{g && g.name}</li>)
-            }
-        </ul>
+        <Paper half>
+            <div className="UserDetails-Wrapper">
+                <Avatar entity={entity} className="UserDetails-Wrapper-Avatar"/>
+                <div className="UserDetails-Wrapper-Info">
+                    <p className="UserDetails-Wrapper-Info-Primary">{entity.firstName} {entity.lastName}</p>
+                    <p className="UserDetails-Wrapper-Info-Secondary">{entity.email}</p>
+                    <ul className="UserDetails-Wrapper-Info-Groups">
+                        {
+                            groups.map(g => <li><Link to={`/groups/${g && g.id}`}>{g && g.name}</Link></li>)
+                        }
+                    </ul>
+                    <div className="UserDetails-Wrapper-Info-Actions">
+                        <Link to={`/users/${entity.id}/edit`}>Edit</Link> | <a href="#" onClick={onClickDelete}>Delete</a>
+                    </div>
+                </div>
+            </div>
+        </Paper>
     </section>
 )
 

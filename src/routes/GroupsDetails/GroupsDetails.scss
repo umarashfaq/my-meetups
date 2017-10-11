@@ -1,0 +1,27 @@
+.GroupsDetails-Wrapper {
+    display: flex;
+}
+
+.GroupsDetails-Wrapper-Avatar {
+    margin-right: 1rem;
+}
+
+.GroupsDetails-Wrapper-Info {
+    flex-grow: 1;
+    margin-top: 0.5rem;
+}
+
+.GroupsDetails-Wrapper-Info-Primary {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.GroupsDetails-Wrapper-Info-Secondary {
+    margin: 0;
+    color: #999;
+}
+
+.GroupsDetails-Wrapper-Info-Members {
+    padding: 0 1rem;
+}

@@ -25,7 +25,10 @@ const Article = ({ title, actions, location, children, isAvailable = true, isLoa
 
 Article.propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
     isAvailable: PropTypes.bool,
     isLoading: PropTypes.bool,
     location: PropTypes.object.isRequired,

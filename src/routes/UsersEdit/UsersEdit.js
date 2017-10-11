@@ -1,16 +1,12 @@
 // libs
 import React from 'react'
-import R from 'ramda'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { push } from 'react-router-redux'
-import Button from 'react-toolbox/lib/button/Button'
 
 // src
 import { updateUser } from '../../actions'
 import { isLoadingUsers, bindForm, getParamValue, getEntityByID } from '../../utils'
-import Loading from './Loading'
-import BlankSlate from './BlankSlate'
 import Content from './Content'
 import { Article } from '../../components'
 
@@ -35,7 +31,6 @@ export default
     })(
         class UsersEdit extends React.Component {
             render() {
-                const { isLoading, isAvailable, location } = this.props
                 return (
                     <Article title="Edit" {...this.props}>
                         <Content {...this.props}/>

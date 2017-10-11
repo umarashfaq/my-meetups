@@ -16,7 +16,15 @@ export default connect((state, ownProps) => {
     const entity = getEntityByID(state, 'users', id)
     const isLoading = isLoadingUsers(state)
     const isAvailable = !!(!isLoading && entity)
-    const groups = isAvailable ? R.map(id => R.path(['entities', 'groups', id], state), denormalizeMultiSelect(entity.groups)) : []
+    const groups = 
+        isAvailable
+            ? R.pipe(
+                R.map(id =>
+                    R.path(['entities', 'groups', id], state)
+                ), 
+                R.reject(R.equals(undefined))
+            )(denormalizeMultiSelect(entity.groups))
+            : []
 
     // console.log(`[UsersEdit/connect] id: ${id}, entity: `, entity)
 
@@ -36,8 +44,6 @@ export default connect((state, ownProps) => {
             .then(dispatch(push(`/users`)))
     }
     render() {
-        const { isLoading, isAvailable, location } = this.props
-
         return (
             <Article title="User Details" {...this.props}>
                 <Content {...this.props} onClickDelete={this.handleClickDelete}/>

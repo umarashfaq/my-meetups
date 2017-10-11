@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'react-toolbox/lib/button/Button'
 import { Link } from 'react-router-dom'
 
 import { Avatar, Section } from '../../components'
@@ -13,11 +12,11 @@ const Content = ({ entity, groups, onClickDelete }) => (
                 <p className="UserDetails-Wrapper-Info-Secondary">{entity.email}</p>
                 <ul className="UserDetails-Wrapper-Info-Groups">
                     {
-                        groups.map(g => <li><Link to={`/groups/${g && g.id}`}>{g && g.name}</Link></li>)
+                        groups.map(g => <li key={g && g.id}><Link to={`/groups/${g && g.id}`}>{g && g.name}</Link></li>)
                     }
                 </ul>
                 <div className="UserDetails-Wrapper-Info-Actions">
-                    <Link to={`/users/${entity.id}/edit`}>Edit</Link> | <a href="#" onClick={onClickDelete}>Delete</a>
+                    <Link to={`/users/${entity.id}/edit`}>Edit</Link> | <a href="/" onClick={onClickDelete}>Delete</a>
                 </div>
             </div>
         </div>

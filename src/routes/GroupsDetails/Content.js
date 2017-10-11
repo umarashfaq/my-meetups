@@ -15,7 +15,7 @@ const Content = ({ entity, members, onClickDelete }) => (
                     }
                 </ul>
                 <div className="GroupsDetails-Wrapper-Info-Actions">
-                    <Link to={`/groups/${entity.id}/edit`}>Edit</Link> | <a href="#" onClick={onClickDelete}>Delete</a>
+                    <Link to={`/groups/${entity.id}/edit`}>Edit</Link> | <a href="/" onClick={onClickDelete}>Delete</a>
                 </div>
             </div>
         </div>

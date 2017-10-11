@@ -1,7 +1,6 @@
 // libs
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import R from 'ramda'
 import Button from 'react-toolbox/lib/button/Button'
@@ -11,7 +10,7 @@ import Input from 'react-toolbox/lib/input/Input'
 import './GroupsList.css'
 import Content from './Content'
 import { deleteGroup, updateGroupSearchQuery } from '../../actions'
-import { Breadcrumbs, Article } from '../../components'
+import { Article } from '../../components'
 import { getGroupMemberCount } from '../../utils'
 
 export default connect(state => {
@@ -59,7 +58,7 @@ export default connect(state => {
         dispatch(updateGroupSearchQuery(query))
     }
     render() {
-        const { isLoading, isAvailable, location, query } = this.props
+        const { query } = this.props
 
         return (
             <Article

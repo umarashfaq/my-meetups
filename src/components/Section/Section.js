@@ -11,7 +11,10 @@ const Section = ({ children, half = false }) => (
 )
 
 Section.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
     half: PropTypes.bool
 }
 

@@ -1,7 +1,6 @@
 // libs
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import R from 'ramda'
 import Button from 'react-toolbox/lib/button/Button'
@@ -11,7 +10,7 @@ import Input from 'react-toolbox/lib/input/Input'
 import './UsersList.css'
 import Content from './Content'
 import { isLoadingUsers } from '../../utils'
-import { Breadcrumbs, Article } from '../../components'
+import { Article } from '../../components'
 import { updateUserSearchQuery } from '../../actions'
 
 export default connect(state => {
@@ -47,7 +46,7 @@ export default connect(state => {
         dispatch(updateUserSearchQuery(query))
     }
     render() {
-        const { isLoading, isAvailable, location, query } = this.props
+        const { query } = this.props
         
         return (
             <Article

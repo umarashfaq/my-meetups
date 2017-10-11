@@ -31,7 +31,7 @@ const getSteps = pathname => {
             R.reduce((buckets, piece) => [...buckets, pieces.slice(0, pieces.indexOf(piece) + 1)], []),
             R.map(bucket => bucket.join('/')),
             R.map(path => ({label: getLabel(path), path})),
-            R.map(step => step.path === pathname ? <span>{step.label}</span> : (<span><Link to={step.path}>{step.label}</Link> / </span>))
+            R.map(step => step.path === pathname ? <span key={step.path}>{step.label}</span> : (<span key={step.path}><Link to={step.path}>{step.label}</Link> / </span>))
         )(pieces)
 
     return steps

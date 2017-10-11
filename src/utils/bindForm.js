@@ -48,7 +48,7 @@ export default (options) => (WrappedComponent) => {
      * 
      */
     handleChangeEntity = entity => {
-      console.log(`[bindForm/handleChangeEntity] Invoking with entity: `, entity)
+      // console.log(`[bindForm/handleChangeEntity] Invoking with entity: `, entity)
         if ( entity ) {
             const { initialize } = this.props
             initialize(entity)

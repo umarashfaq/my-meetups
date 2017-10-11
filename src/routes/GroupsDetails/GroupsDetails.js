@@ -7,7 +7,6 @@ import {
     getParamValue,
     getEntityByID,
     isLoadingGroups,
-    denormalizeMultiSelect,
     isGroupDeletable
 } from '../../utils'
 import Content from './Content'

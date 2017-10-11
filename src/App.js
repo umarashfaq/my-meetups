@@ -1,10 +1,8 @@
 // libs
 import React from 'react'
-import { Route, Link, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 
 // src
-import fire, { startListening, stopListening } from './fire'
 import {
   Home,
   UsersList,

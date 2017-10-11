@@ -1,11 +1,10 @@
 // libs
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import Button from 'react-toolbox/lib/button/Button'
 import { push } from 'react-router-redux'
 
 // src
-import { renderTextField, bindForm, required, minLength, email } from '../../utils'
+import { renderTextField, bindForm, required, minLength } from '../../utils'
 import { createGroup } from '../../actions'
 import { Article, Section } from '../../components'
 

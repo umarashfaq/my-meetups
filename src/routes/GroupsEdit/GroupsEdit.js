@@ -2,7 +2,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import Button from 'react-toolbox/lib/button/Button'
 import { push } from 'react-router-redux'
 
 // src

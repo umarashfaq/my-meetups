@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'react-toolbox/lib/button/Button'
 import { Field } from 'redux-form'
 
 import { Section } from '../../components'
@@ -9,8 +8,6 @@ import {
     renderGroupsField,
 
     normalizeMultiSelect,
-
-    bindForm,
     required,
     minLength,
     email

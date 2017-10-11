@@ -1,19 +1,15 @@
 // libs
 import React from 'react'
 import { Field } from 'redux-form'
-import Button from 'react-toolbox/lib/button/Button'
-import Card from 'react-toolbox/lib/card/Card'
 
 // src
 import { Section } from '../../components'
 import {
     renderTextField,
-    renderHiddenField,
     renderGroupsField,
 
     normalizeMultiSelect,
 
-    bindForm,
     required,
     minLength,
     email

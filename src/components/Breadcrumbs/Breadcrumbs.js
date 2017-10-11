@@ -7,7 +7,7 @@ import './Breadcrumbs.css'
 
 // pathname.split('/')
 const paths = [
-    {name: '/', label: 'Home', regex: pathToRegexp('/')},
+    {name: '/', label: 'Home', regex: pathToRegexp('')},
     {name: '/users', label: 'Users', regex: pathToRegexp('/users')},
     {name: '/users/new', label: 'Create', regex: pathToRegexp('/users/new')},
     {name: '/users/:id', label: 'Details', regex: pathToRegexp('/users/:id')},

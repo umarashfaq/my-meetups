@@ -43,6 +43,7 @@
       "CARD",
       "CHIP",
       "INPUT",
+      "PROGRESS_BAR",
       "TABS"
     ],
     "customProperties": {

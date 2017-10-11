@@ -8,7 +8,7 @@ import R from 'ramda'
 import './UserDetails.css'
 import { getParamValue, getEntityByID, isLoadingUsers, denormalizeMultiSelect } from '../../utils'
 import Content from './Content'
-import { Page } from '../../components'
+import { Article } from '../../components'
 import { deleteUser } from '../../actions'
 
 export default connect((state, ownProps) => {
@@ -39,9 +39,9 @@ export default connect((state, ownProps) => {
         const { isLoading, isAvailable, location } = this.props
 
         return (
-            <Page title="User Details" {...this.props}>
+            <Article title="User Details" {...this.props}>
                 <Content {...this.props} onClickDelete={this.handleClickDelete}/>
-            </Page>
+            </Article>
         )
     }
 })

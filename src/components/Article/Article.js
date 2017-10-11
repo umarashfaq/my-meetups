@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './Page.css'
+import './Article.css'
 import Breadcrumbs from '../Breadcrumbs'
 import Loading from './Loading'
 import BlankSlate from './BlankSlate'
 
-const Page = ({ title, actions, location, children, isAvailable = true, isLoading = false }) => (
+const Article = ({ title, actions, location, children, isAvailable = true, isLoading = false }) => (
     <article>
         <Breadcrumbs pathname={location.pathname}/>
-        <div className="Page-Header">
+        <div className="Article-Header">
             <h1>{title}</h1>
-            <div className="Page-Actions">{actions}</div>
+            <div className="Article-Actions">{actions}</div>
         </div>
         {
             isLoading    ? <Loading />    :
@@ -21,7 +21,7 @@ const Page = ({ title, actions, location, children, isAvailable = true, isLoadin
     </article>
 )
 
-Page.propTypes = {
+Article.propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     isAvailable: PropTypes.bool,
@@ -30,4 +30,4 @@ Page.propTypes = {
     actions: PropTypes.element
 }
 
-export default Page
+export default Article

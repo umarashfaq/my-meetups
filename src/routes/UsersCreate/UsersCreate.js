@@ -11,7 +11,7 @@ import Loading from './Loading'
 import BlankSlate from './BlankSlate'
 import Content from './Content'
 import './UsersCreate.css'
-import { Breadcrumbs } from '../../components'
+import { Article } from '../../components'
 
 const minLength2 = minLength(2)
 
@@ -30,11 +30,9 @@ export default
             render() {
                 const { isLoading, isAvailable, location } = this.props
                 return (
-                    <article>
-                        <Breadcrumbs pathname={location.pathname}/>
-                        <h1>Create User</h1>
-                        <Content    {...this.props}/>
-                    </article>
+                    <Article title="Create User" {...this.props}>
+                        <Content {...this.props}/>
+                    </Article>
                 )
             }
         }

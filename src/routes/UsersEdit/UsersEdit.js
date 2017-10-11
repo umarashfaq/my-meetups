@@ -12,14 +12,14 @@ import { isLoadingUsers, bindForm, getParamValue, getEntityByID } from '../../ut
 import Loading from './Loading'
 import BlankSlate from './BlankSlate'
 import Content from './Content'
-import { Breadcrumbs } from '../../components'
+import { Article } from '../../components'
 
 export default 
     connect((state, ownProps) => {
         const id = getParamValue(ownProps, 'id')
         const entity = getEntityByID(state, 'users', id)
         const isLoading = isLoadingUsers(state)
-        const isAvailable = !isLoading && entity
+        const isAvailable = !!(!isLoading && entity)
 
         // console.log(`[UsersEdit/connect] id: ${id}, entity: `, entity)
 
@@ -37,15 +37,9 @@ export default
             render() {
                 const { isLoading, isAvailable, location } = this.props
                 return (
-                    <article>
-                        <Breadcrumbs pathname={location.pathname}/>
-                        <h1>Edit</h1>
-                        {
-                            isLoading    ? <Loading    {...this.props}/> :
-                            !isAvailable ? <BlankSlate {...this.props}/> :
-                                           <Content    {...this.props}/>
-                        }
-                    </article>
+                    <Article title="Edit" {...this.props}>
+                        <Content {...this.props}/>
+                    </Article>
                 )
             }
         }

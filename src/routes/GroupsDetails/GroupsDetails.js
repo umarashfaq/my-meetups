@@ -11,7 +11,7 @@ import {
     isGroupDeletable
 } from '../../utils'
 import Content from './Content'
-import { Page, Paper } from '../../components'
+import { Article } from '../../components'
 import { deleteGroup } from '../../actions'
 import './GroupsDetails.css'
 
@@ -47,9 +47,9 @@ export default connect((state, ownProps) => {
     }
     render() {
         return (
-            <Page title="Group Details" {...this.props}>
+            <Article title="Group Details" {...this.props}>
                 <Content {...this.props} onClickDelete={this.handleClickDelete}/>
-            </Page>
+            </Article>
         )
     }
 })

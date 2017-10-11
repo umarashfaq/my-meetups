@@ -10,7 +10,7 @@ import Button from 'react-toolbox/lib/button/Button'
 import './GroupsList.css'
 import Content from './Content'
 import { deleteGroup } from '../../actions'
-import { Breadcrumbs, Page } from '../../components'
+import { Breadcrumbs, Article } from '../../components'
 import { getGroupMemberCount } from '../../utils'
 
 export default connect(state => {
@@ -52,11 +52,11 @@ export default connect(state => {
         const { isLoading, isAvailable, location } = this.props
 
         return (
-            <Page title="Groups" actions={<Button label="New" accent raised className="GroupList-Button" onClick={this.handleClickNew}/>} {...this.props}>
+            <Article title="Groups" actions={<Button label="New" accent raised className="GroupList-Button" onClick={this.handleClickNew}/>} {...this.props}>
                 <Content
                     {...this.props}
                     onClickItem={this.handleClickItem}/>
-            </Page>
+            </Article>
         )
     }
 })

@@ -1,0 +1,20 @@
+.Article {
+
+}
+
+.Article-Header {
+    display: flex;
+
+    & > h1 {
+        flex-grow: 1;
+    }
+}
+
+.Article-Loading {
+    text-align: center;
+    margin: 10rem;
+}
+
+.Article-Loading-ProgressBar {
+    margin: auto;
+}

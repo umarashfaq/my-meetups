@@ -17,7 +17,7 @@ import {
     isLoadingGroups
 } from '../../utils'
 import { updateGroup } from '../../actions'
-import { Page, Paper } from '../../components'
+import { Article, Section } from '../../components'
 
 const minLength2 = minLength(2)
 
@@ -44,8 +44,8 @@ export default
             render() {
                 const { onSubmit, renderSubmitButton, renderMessage } = this.props
                 return (
-                    <Page title="Edit Group" {...this.props}>
-                        <Paper half>
+                    <Article title="Edit Group" {...this.props}>
+                        <Section half>
                             {
                                 renderMessage()
                             }
@@ -67,8 +67,8 @@ export default
                                     })
                                 }
                             </form>
-                        </Paper>
-                    </Page>
+                        </Section>
+                    </Article>
                 )
             }
         }

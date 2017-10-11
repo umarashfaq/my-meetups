@@ -5,7 +5,7 @@ import Button from 'react-toolbox/lib/button/Button'
 import Card from 'react-toolbox/lib/card/Card'
 
 // src
-import { Paper } from '../../components'
+import { Section } from '../../components'
 import {
     renderTextField,
     renderHiddenField,
@@ -22,8 +22,8 @@ import {
 const minLength2 = minLength(2)
 
 const Content = ({ onSubmit, renderSubmitButton, renderMessage, sourceGroup }) => (
-    <section className="UsersCreate-Content">
-        <Paper half>
+    <div className="UsersCreate-Content">
+        <Section half>
             {
                 renderMessage()
             }
@@ -66,8 +66,8 @@ const Content = ({ onSubmit, renderSubmitButton, renderMessage, sourceGroup }) =
                     })
                 }
             </form>
-        </Paper>
-    </section>
+        </Section>
+    </div>
 )
 
 export default Content

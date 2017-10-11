@@ -10,7 +10,7 @@ import Button from 'react-toolbox/lib/button/Button'
 import './UsersList.css'
 import Content from './Content'
 import { isLoadingUsers } from '../../utils'
-import { Breadcrumbs, Page } from '../../components'
+import { Breadcrumbs, Article } from '../../components'
 
 export default connect(state => {
     const users = R.pipe(R.path(['entities', 'users']), R.values)(state)
@@ -39,11 +39,11 @@ export default connect(state => {
         const { isLoading, isAvailable, location } = this.props
 
         return (
-            <Page title="Users" actions={<Button label="New" accent raised className="UserList-Button" onClick={this.handleClickNew}/>} {...this.props}>
+            <Article title="Users" actions={<Button label="New" accent raised className="UserList-Button" onClick={this.handleClickNew}/>} {...this.props}>
                 <Content  {...this.props}
                     onClickEdit={this.handleClickEdit}
                     onClickDetails={this.handleClickDetails}/>
-            </Page>
+            </Article>
         )
     }
 })

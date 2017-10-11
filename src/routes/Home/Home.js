@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Button from 'react-toolbox/lib/button/Button'
+import DocumentTitle from 'react-document-title'
 
 import './Home.css'
 
@@ -17,6 +18,7 @@ export default connect()(class Home extends React.Component {
     render() {
         return (
             <article className="Home">
+                <DocumentTitle title="MyMeetups"/>
                 <h1 className="Home-Heading">MyMeetups</h1>
                 <p className="Home-Tagline">An app that demonstrates use of React, Redux, Firebase, React-Toolbox, and ES6</p>
                 <div className="Home-Actions">
